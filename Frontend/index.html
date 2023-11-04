@@ -15,9 +15,211 @@
 
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
 </head>
 
 <body>
+    <!-- Footer -->
+    <p class="text-center text-muted">
+    <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fa-brands fa-discord"></i></a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-twitter"></i></a>
+
+                <!-- Google -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-google"></i></a>
+
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-instagram"></i></a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-linkedin-in"></i></a>
+
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-github"></i></a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2023 Copyright:
+            <a class="text-white" href="file:///C:/Users/saman/ZotHacks/Frontend/index.html#!">TeamAteScheduling.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    </p>
+    </footer>
+    </div>
+
+    <!-- Calendar -->
+    <h1 id="title">My Title</h1>
+    <!-- HTML CODE -->
+    <div class="container-fluid px-0 px-sm-4 mx-auto">
+        <div class="row justify-content-center mx-0">
+            <div class="col-lg-10">
+                <div class="card border-0">
+                    <form autocomplete="off">
+                        <div class="card-header bg-dark">
+                            <div class="mx-0 mb-0 row justify-content-sm-center justify-content-start px-1">
+                                <input type="text" id="dp1" class="datepicker" placeholder="Pick Date" name="date"
+                                    readonly><span class="fa fa-calendar"></span>
+                            </div>
+                        </div>
+                        <div class="card-body p-3 p-sm-5">
+                            <div class="row text-center mx-0">
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">9:00AM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">9:30AM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">10:00AM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">10:30AM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">11:00AM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">11:30AM</button></div>
+                                </div>
+                            </div>
+                            <div class="row text-center mx-0">
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">12:00PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">12:30PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">1:00PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">1:30PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">2:00PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">2:30PM</button></div>
+                                </div>
+                            </div>
+                            <div class="row text-center mx-0">
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">3:00PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">3:30PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">4:00PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">4:30PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">5:00PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">5:30PM</button></div>
+                                </div>
+                            </div>
+                            <div class="row text-center mx-0">
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">6:00PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">6:30PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">7:00PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">7:30PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">8:00PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">8:30PM</button></div>
+                                </div>
+                            </div>
+                            <div class="row text-center mx-0">
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">9:00PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">9:30PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">10:00PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">10:30PM</button></div>
+                                </div>
+                                <div class="col-md-2 col-4 my-1 px-2">
+                                    <div class="cell py-1"><button class="btn btn-secondary"
+                                            type="submit">11:00PM</button></div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+=======
     <header>
         <!-- Background image -->
         <div class="p-5 text-center bg-image" style="
@@ -91,6 +293,7 @@
         </footer>
     </div>
 
+    <script src="index.js"></script>
 </body>
 
 </html>
