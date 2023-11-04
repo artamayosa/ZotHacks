@@ -31,7 +31,7 @@ async def login(username: Annotated[str, Form()], password: Annotated[str, Form(
 
     UserCollection.insert_one({ "username": username , "password": password })
 
-    ...
+    
 
 @app.get('/rooms/')
 async def getRooms(start_time:int, end_time:int):
@@ -60,6 +60,17 @@ def time_in_range(start, end, x):
     else:
         return start <= x or x <= end
   
+@app.post('/reserve')
+async def reserveRoom(username: str, location_name: str, start_time:float, end_time:float):
+    """
+    Given a username, location name, start time, and end time, add the user's reservation to the Bookings collection.
+    """
+    bookingCollection.insert_one({'locationId': location_name, 
+                                  'time_start':start_time, 
+                                  'time_end':end_time, 
+                                  'username':username})
+    
+
 @app.get('/reservations/{username}')
 async def reservations(username):
 
@@ -82,4 +93,4 @@ async def reservations(username):
 
 
 
-    ...
+
