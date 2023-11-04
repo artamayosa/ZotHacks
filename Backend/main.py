@@ -34,7 +34,7 @@ async def login(username: Annotated[str, Form()], password: Annotated[str, Form(
     
 
 @app.get('/rooms')
-async def getRooms(start_time:int, end_time:int):
+async def getRooms(start_time: Annotated[float, Form()], end_time: Annotated[float, Form()]):
     """
     Example time range: 10/1/2-12:00
     Given a time range, returns a list of unbooked rooms in that time frame.
@@ -42,15 +42,22 @@ async def getRooms(start_time:int, end_time:int):
     
     bookedRooms = list()
     availableRooms = list()
+    
+    
     for booking in bookingCollection.find():
+        
         if time_in_range(booking['time_start'], booking['time_end'], start_time) \
             or time_in_range(booking['time_start'], booking['time_end'], end_time):
-            bookedRooms.append(booking['locationId'])
-    
+            bookedRooms.append((booking['locationId'], booking['room']))
+   
     for location in locCollection.find():
-        if location['name'] not in bookedRooms:
-            availableRooms.append(location['name'])
-
+        roomDict = dict()
+        roomDict[location['name']] = []
+        for room in location['rooms']:
+            if (location['name'], room) not in bookedRooms:
+                roomDict[location['name']].append(room)
+        if len(roomDict[location['name']]) != 0:
+            availableRooms.append(roomDict)
     return {"locations": availableRooms}
 
 def time_in_range(start, end, x):
@@ -61,11 +68,13 @@ def time_in_range(start, end, x):
         return start <= x or x <= end
   
 @app.post('/reserve')
-async def reserveRoom(username: str, location_name: str, start_time:float, end_time:float):
+async def reserveRoom(username: Annotated[str, Form()], location_name: Annotated[str, Form()], room: Annotated[str, Form()],
+                      start_time:Annotated[float, Form()], end_time:Annotated[float, Form()]):
     """
     Given a username, location name, start time, and end time, add the user's reservation to the Bookings collection.
     """
     bookingCollection.insert_one({'locationId': location_name, 
+                                  'room': room,
                                   'time_start':start_time, 
                                   'time_end':end_time, 
                                   'username':username})
@@ -86,7 +95,8 @@ async def reservations(username):
         start_time = reservation['time_start']  # Replace 'start_time' with the actual field name
         end_time = reservation['time_end']      # Replace 'end_time' with the actual field name
         location = reservation['locationId']
-        userInfo.append({'time_start': start_time, 'time_end': end_time, 'locationId' : location})
+        room = reservation['room']
+        userInfo.append({'time_start': start_time, 'time_end': end_time, 'locationId' : location, 'room': room})
 
     return {"reservations": userInfo}
 
