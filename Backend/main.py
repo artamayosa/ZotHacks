@@ -34,7 +34,7 @@ async def login(username: Annotated[str, Form()], password: Annotated[str, Form(
     ...
 
 @app.get('/rooms/')
-def getRooms(start_time:int, end_time:int):
+async def getRooms(start_time:int, end_time:int):
     """
     Example time range: 10/1/2-12:00
     Given a time range, returns a list of unbooked rooms in that time frame.
@@ -43,8 +43,8 @@ def getRooms(start_time:int, end_time:int):
     bookedRooms = list()
     availableRooms = list()
     for booking in bookingCollection.find():
-        if time_in_range(booking['time_start'], booking['time_ending'], start_time) \
-            or time_in_range(booking['time_start'], booking['time_ending'], end_time):
+        if time_in_range(booking['time_start'], booking['time_end'], start_time) \
+            or time_in_range(booking['time_start'], booking['time_end'], end_time):
             bookedRooms.append(booking['locationId'])
     
     for location in locCollection.find():
@@ -53,10 +53,19 @@ def getRooms(start_time:int, end_time:int):
 
     return {"locations": availableRooms}
 
-def time_in_range(start: datetime.time, end: datetime.time, x):
+def time_in_range(start: float, end: float, x):
     """Return true if x is in the range [start, end]"""
     if start <= end:
         return start <= x <= end
     else:
         return start <= x or x <= end
   
+@app.post('/reserve')
+async def reserveRoom(username: str, location_name: str, start_time:float, end_time:float):
+    """
+    Given a username, location name, start time, and end time, add the user's reservation to the Bookings collection.
+    """
+    bookingCollection.insert_one({'locationId': location_name, 
+                                  'time_start':start_time, 
+                                  'time_end':end_time, 
+                                  'username':username})
