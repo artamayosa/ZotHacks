@@ -32,6 +32,13 @@ async def login(username: Annotated[str, Form()], password: Annotated[str, Form(
     UserCollection.insert_one({ "username": username , "password": password })
 
     
+@app.get('/locations')
+async def getLocationInfo():
+    locationList = []
+    for location in locCollection.find():
+        locationList.append({ "name": location['name'], "rooms": location['rooms']})
+    return locationList
+
 
 @app.get('/rooms')
 async def getRooms(start_time: Annotated[float, Form()], end_time: Annotated[float, Form()]):
@@ -45,7 +52,6 @@ async def getRooms(start_time: Annotated[float, Form()], end_time: Annotated[flo
     
     
     for booking in bookingCollection.find():
-        
         if time_in_range(booking['time_start'], booking['time_end'], start_time) \
             or time_in_range(booking['time_start'], booking['time_end'], end_time):
             bookedRooms.append((booking['locationId'], booking['room']))
