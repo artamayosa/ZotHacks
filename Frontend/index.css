@@ -9,8 +9,8 @@ h1 {
 
 .btn-group button {
     margin:auto;
-    background-color: #04AA6D; 
-    border: 1px solid green; 
+    background-color: #7cc1e1; 
+    border: 1px solid darkblue; 
     font-family: sans-serif;
     font-size: large;
     color: white; 
@@ -26,5 +26,5 @@ h1 {
   
 
 .btn-group button:hover {
-    background-color: #3e8e41;
+    background-color: #e2d172;
 }
