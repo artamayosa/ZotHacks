@@ -27,13 +27,24 @@ const locations = [
     }
 ]
 
-function onLoad() {
+async function onLoad() {
+    const actualLocations = await fetch('/locations').then(response => response.json()).catch(() => [])
+
+    // const emoji = await fetch('https://emojihub.yurace.pro/api/random')
+    // const data = await emoji.json()
+    // console.log(emoji, data)
+    
     const allButtons = document.getElementById('buttons')
 
     const elements = locations.forEach(location => {
         const locationName = location.name
 
-        const div = document.createElement('div')
+        const div = document.createElement('div');
+        div.style.textAlign = 'center';
+        div.style.fontFamily = 'sans-serif';
+        div.style.fontSize = 'x-large';
+        div.style.color = 'blue';
+        
         
         div.textContent = locationName
 
