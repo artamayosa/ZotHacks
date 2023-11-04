@@ -1,3 +1,31 @@
 h1 {
     text-align: center;
 }
+
+#booked {
+    background-color:red;
+    pointer-events: none;
+}
+
+.btn-group button {
+    margin:auto;
+    background-color: #04AA6D; 
+    border: 1px solid green; 
+    font-family: sans-serif;
+    font-size: large;
+    color: white; 
+    padding: 19px 33px; 
+    cursor: pointer; 
+    width: 80%; 
+    display:block;
+}
+  
+.btn-group button:not(:last-child) {
+    border-bottom: none; 
+}
+  
+
+.btn-group button:hover {
+    background-color: #3e8e41;
+}
+
