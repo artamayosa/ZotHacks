@@ -1,8 +1,6 @@
 from typing import Union
 from fastapi import FastAPI
 from pydantic import BaseModel
-import datetime
-
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
@@ -10,10 +8,11 @@ uri = "mongodb+srv://zothacks:zotzotzot@petermeeter.l3g6u1b.mongodb.net/?retryWr
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
+
 db = client.PeterMeeter
 bookingCollection = db.Bookings
 locCollection = db.Locations
-
+UserCollection = db.Users
 
 # Send a ping to confirm a successful connection
 try:
@@ -24,7 +23,16 @@ except Exception as e:
 
 app = FastAPI()
 
+@app.post('/login')
+async def login(username: Annotated[str, Form()], password: Annotated[str, Form()]):
+    """
+    Given a username and password from form data, add them to the database.
+    """
 
+    UserCollection.insert_one({ "username": username , "password": password })
+
+    ...
+=======
 
 @app.get("/")
 def read_root():
@@ -58,8 +66,6 @@ def getRooms(start_time:int, end_time:int):
             availableRooms.append(location['name'])
 
     return {"locations": availableRooms}
-    
-
 
 def time_in_range(start: datetime.time, end: datetime.time, x):
     """Return true if x is in the range [start, end]"""
@@ -67,5 +73,4 @@ def time_in_range(start: datetime.time, end: datetime.time, x):
         return start <= x <= end
     else:
         return start <= x or x <= end
-    
-
+  
