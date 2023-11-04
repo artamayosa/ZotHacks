@@ -34,7 +34,7 @@ async def login(username: Annotated[str, Form()], password: Annotated[str, Form(
     ...
 
 @app.get('/rooms/')
-def getRooms(start_time:int, end_time:int):
+async def getRooms(start_time:int, end_time:int):
     """
     Example time range: 10/1/2-12:00
     Given a time range, returns a list of unbooked rooms in that time frame.
@@ -43,8 +43,8 @@ def getRooms(start_time:int, end_time:int):
     bookedRooms = list()
     availableRooms = list()
     for booking in bookingCollection.find():
-        if time_in_range(booking['time_start'], booking['time_ending'], start_time) \
-            or time_in_range(booking['time_start'], booking['time_ending'], end_time):
+        if time_in_range(booking['time_start'], booking['time_end'], start_time) \
+            or time_in_range(booking['time_start'], booking['time_end'], end_time):
             bookedRooms.append(booking['locationId'])
     
     for location in locCollection.find():
@@ -53,10 +53,33 @@ def getRooms(start_time:int, end_time:int):
 
     return {"locations": availableRooms}
 
-def time_in_range(start: datetime.time, end: datetime.time, x):
+def time_in_range(start, end, x):
     """Return true if x is in the range [start, end]"""
     if start <= end:
         return start <= x <= end
     else:
         return start <= x or x <= end
   
+@app.get('/reservations/{username}')
+async def reservations(username):
+
+    
+    """
+    Given a username, get all of the reservations they've made (from the Bookings collection)
+    """
+
+    userInfo = list()
+
+    reservations = bookingCollection.find({'username': username})
+    
+    for reservation in reservations:
+        start_time = reservation['time_start']  # Replace 'start_time' with the actual field name
+        end_time = reservation['time_end']      # Replace 'end_time' with the actual field name
+        location = reservation['locationId']
+        userInfo.append({'time_start': start_time, 'time_end': end_time, 'locationId' : location})
+
+    return {"reservations": userInfo}
+
+
+
+    ...
