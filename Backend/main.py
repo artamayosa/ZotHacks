@@ -33,7 +33,7 @@ async def login(username: Annotated[str, Form()], password: Annotated[str, Form(
 
     
 
-@app.get('/rooms/')
+@app.get('/rooms')
 async def getRooms(start_time:int, end_time:int):
     """
     Example time range: 10/1/2-12:00
@@ -74,7 +74,6 @@ async def reserveRoom(username: str, location_name: str, start_time:float, end_t
 @app.get('/reservations/{username}')
 async def reservations(username):
 
-    
     """
     Given a username, get all of the reservations they've made (from the Bookings collection)
     """
