@@ -1,5 +1,5 @@
-from typing import Union
-from fastapi import FastAPI
+from typing import Union, Annotated
+from fastapi import FastAPI, Form
 from pydantic import BaseModel
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
@@ -32,20 +32,6 @@ async def login(username: Annotated[str, Form()], password: Annotated[str, Form(
     UserCollection.insert_one({ "username": username , "password": password })
 
     ...
-=======
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/username/{item_id}")
-def get_users(item_id: str):
-    return {"item_id": item_id, "q": userList[item_id].email}
-
-@app.post("/test/{email}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
 
 @app.get('/rooms/')
 def getRooms(start_time:int, end_time:int):
