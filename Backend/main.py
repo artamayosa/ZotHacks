@@ -3,6 +3,7 @@ from fastapi import FastAPI, Form
 from pydantic import BaseModel
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from fastapi.staticfiles import StaticFiles
 
 uri = "mongodb+srv://zothacks:zotzotzot@petermeeter.l3g6u1b.mongodb.net/?retryWrites=true&w=majority"
 
@@ -23,15 +24,19 @@ except Exception as e:
 
 app = FastAPI()
 
+@app.get('/hello')
+def getHello():
+    return ['a', 'b', 'c']
+
 @app.post('/login')
 async def login(username: Annotated[str, Form()], password: Annotated[str, Form()]):
     """
     Given a username and password from form data, add them to the database.
     """
 
-    UserCollection.insert_one({ "username": username , "password": password })
+    UserCollection.insert_one({ "username": username , "password": password })  
 
-    
+
 
 @app.get('/rooms')
 async def getRooms(start_time: Annotated[float, Form()], end_time: Annotated[float, Form()]):
@@ -102,4 +107,5 @@ async def reservations(username):
 
 
 
+app.mount("/static", StaticFiles(directory="../Frontend"))
 
