@@ -1,51 +1,56 @@
-const params = new URLSearchParams(window.location.search.slice(1))
+const params = new URLSearchParams(window.location.search.slice(1));
 
-const room=params.get("room")
+const room = params.get("room");
 
-const roomLocation=params.get("location")
+const roomLocation = params.get("location");
 
-const username = "sammich"
+const username = "sammich";
 
-document.addEventListener('DOMContentLoaded', onLoad)
+document.addEventListener("DOMContentLoaded", onLoad);
 
-const unavailableTimes = [
- "1:00PM", "2:00PM", "4:00PM"
-]
+async function onLoad() {
+  const title = document.getElementById("title");
+  if (title) {
+    title.textContent = roomLocation + ", " + room;
+  }
 
-function onLoad() {
-    const title = document.getElementById('title')
-    if (title) {
-        title.textContent = roomLocation + ', ' + room
-    }
+  const unavailableTimes = await fetch(`/times?location_name=${roomLocation}&room=${room}`).then(res => res.json())
 
-    document.querySelectorAll(".time-button").forEach((element) => {
-        const time = element.textContent
-
-        if (unavailableTimes.includes(time)) {
-            element.classList.add("disabled")
-        } else {
-            element.classList.add("btn-primary")
-        }
-
-        element.addEventListener('click', handleClick)
-    })
+  setButtons(unavailableTimes)
 }
 
-function handleClick(event) {
-    event.preventDefault()
-    console.log(event)
+function setButtons(unavailableTimes) {
+    document.querySelectorAll(".time-button").forEach((element) => {
+        const time = element.textContent;
+    
+        if (unavailableTimes.includes(time)) {
+          element.classList.add("disabled");
+          element.classList.remove("btn-primary");
+        } else {
+          element.classList.remove("disabled");
+          element.classList.add("btn-primary");
+        }
+    
+        element.addEventListener("click", handleClick);
+      });
+}
 
-    const time= event.target.textContent
-   
+async function handleClick(event) {
+  event.preventDefault();
+  console.log(event);
 
-    const body= new FormData()
-    body.append("start_time", time)
-    body.append("end_time", time)
-    body.append("username", username)
-    body.append("location_name", room)
+  const time = event.target.textContent;
 
-    fetch ("", {
-        method: "POST", body
-    })
+  const body = new FormData();
+  body.append("start_time", time);
+  body.append("room", room);
+  body.append("username", username);
+  body.append("location_name", roomLocation);
 
+  const newUnavailableButtons = await fetch("/reserve", {
+    method: "POST",
+    body,
+  }).then(res => res.json())
+
+  setButtons(newUnavailableButtons)
 }

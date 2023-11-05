@@ -76,7 +76,7 @@ async def getRooms(start_time: Annotated[str, Form()]):
   
 
 @app.get('/times')
-async def getUnavailableTimes(location_name: Annotated[str, Form()], room: Annotated[str, Form()]):
+async def getUnavailableTimes(location_name: str, room: str):
     """
     Given a location and a room in that location, return an array of all the available times
     """
@@ -98,6 +98,17 @@ async def reserveRoom(username: Annotated[str, Form()], location_name: Annotated
                                   'room': room,
                                   'time_start':start_time, 
                                   'username':username})
+    
+
+    timeList = []
+    
+    for booking in bookingCollection.find({'locationId': location_name, 'room': room}):
+        timeList.append(booking['time_start'])
+    
+    return timeList
+
+
+    
     
 
 @app.get('/reservations/{username}')
