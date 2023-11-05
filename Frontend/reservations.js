@@ -1,7 +1,14 @@
 const query = window.location.search.slice(1)
+
 const [key, room] = query.split('=')
 
+const username = "sammich"
+
 document.addEventListener('DOMContentLoaded', onLoad)
+
+const unavailableTimes = [
+ "1:00PM", "2:00PM", "4:00PM"
+]
 
 function onLoad() {
     $('.datepicker').datepicker({
@@ -16,9 +23,19 @@ function onLoad() {
     });
 
     const title = document.getElementById('title')
-    title.textContent = room
+    if (title) {
+        title.textContent = room
+    }
 
     document.querySelectorAll(".time-button").forEach((element) => {
+        const time = element.textContent
+
+        if (unavailableTimes.includes(time)) {
+            element.classList.add("disabled")
+        } else {
+            element.classList.add("btn-primary")
+        }
+
         element.addEventListener('click', handleClick)
     })
 }
@@ -28,7 +45,7 @@ function handleClick(event) {
     console.log(event)
 
     const time= event.target.textContent
-    const username= "sammich"
+   
 
     const body= new FormData()
     body.append("start_time", time)
