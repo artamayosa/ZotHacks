@@ -107,8 +107,6 @@ async def reserveRoom(username: Annotated[str, Form()], location_name: Annotated
     
     return timeList
 
-
-    
     
 
 @app.get('/reservations/{username}')
