@@ -26,7 +26,7 @@ async function onLoad() {
         div.style.fontWeight = 'bold';
         div.style.gap = '4px';
         div.style.borderWidth = '20px'; 
-        div.style.backgroundColor = '#FFFDD0';
+        div.style.backgroundColor = 'rgb(173, 232, 190)';
         div.style.border= '1px solid black';
         div.style.borderRadius = '16px'
         div.style.paddingBottom = '20px'
