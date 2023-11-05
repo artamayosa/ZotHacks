@@ -1,4 +1,7 @@
-
+fetch('/hello').then(async (res) => {
+    const data = await res.json()
+    console.log('data: ', data)
+})
 
 const submitButton = document.getElementById('submit-button')
 
@@ -14,7 +17,7 @@ function user_login(event) {
     body.append('username', username)
     body.append('password', password)
     fetch('', { method: 'POST', body }).catch(e => console.log('error: ', e))
-console.log(window.location)
+    console.log(window.location)
     // window.location.pathname="/scheduling.html"
-    
+
 }
