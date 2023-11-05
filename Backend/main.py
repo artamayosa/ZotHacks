@@ -24,6 +24,10 @@ except Exception as e:
 
 app = FastAPI()
 
+@app.get('/request')
+def getHello():
+    return "abc"
+
 @app.get('/hello')
 def getHello():
     return ['a', 'b', 'c']
