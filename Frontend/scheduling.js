@@ -1,6 +1,8 @@
-const query = window.location.search.slice(1)
+const params = new URLSearchParams(window.location.search.slice(1))
 
-const [key, room] = query.split('=')
+const room=params.get("room")
+
+const roomLocation=params.get("location")
 
 const username = "sammich"
 
@@ -11,20 +13,9 @@ const unavailableTimes = [
 ]
 
 function onLoad() {
-    $('.datepicker').datepicker({
-        format: 'mm/dd/yyyy',
-        autoclose: true,
-        startDate: '0d'
-    });
-
-    $('.cell').click(function () {
-        $('.cell').removeClass('select');
-        $(this).addClass('select');
-    });
-
     const title = document.getElementById('title')
     if (title) {
-        title.textContent = room
+        title.textContent = roomLocation + ', ' + room
     }
 
     document.querySelectorAll(".time-button").forEach((element) => {
